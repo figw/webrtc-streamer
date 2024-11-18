@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
 	TurnRedirector turnRedirector;
 
 	std::string httpAddress("0.0.0.0:");
-	std::string httpPort = "8000";
+	std::string httpPort = "8010";
 	const char * port = getenv("PORT");
 	if (port)
 	{
