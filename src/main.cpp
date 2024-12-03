@@ -8,6 +8,7 @@
 ** -------------------------------------------------------------------------*/
 
 #include <signal.h>
+// #include <windows.h>
 
 #include <iostream>
 #include <fstream>
@@ -28,6 +29,18 @@
 #endif
 
 PeerConnectionManager* webRtcServer = NULL;
+
+// void printAndWait() {
+//     std::cout << "运行成功！此窗口 3 秒后自动隐藏..." << std::endl;
+//     std::this_thread::sleep_for(std::chrono::seconds(3));
+// }
+
+// void hideWindow(const std::string& windowTitle) {
+//     HWND hwnd;
+//     if (hwnd = FindWindow(NULL, windowTitle.c_str())) {
+//         ShowWindow(hwnd, SW_HIDE);
+//     }
+// }
 
 void sighandler(int n)
 {
@@ -89,7 +102,7 @@ int main(int argc, char* argv[])
 	TurnRedirector turnRedirector;
 
 	std::string httpAddress("0.0.0.0:");
-	std::string httpPort = "8010";
+	std::string httpPort = "9000";
 	const char * port = getenv("PORT");
 	if (port)
 	{
@@ -329,6 +342,10 @@ int main(int argc, char* argv[])
 				std::cout << "TURN external addr:" << external_server_addr.ToString() << std::endl;			
 				turnserver->SetExternalSocketFactory(new rtc::BasicPacketSocketFactory(thread->socketserver()), rtc::SocketAddress(external_server_addr.ipaddr(), 0));
 			}
+
+			// SetConsoleTitle("webrtc-streamer");
+			// printAndWait();
+    		// hideWindow("webrtc-streamer");
 			
 			// mainloop
 			signal(SIGINT,sighandler);
